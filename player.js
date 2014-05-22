@@ -1,5 +1,20 @@
 var playing = false;
 
+var filterCutoff = 20000;
+var filterCutoffInput = document.getElementById("filter-cutoff");
+filterCutoffInput.addEventListener("input", function() {
+	filterCutoff = filterCutoffInput.value;
+	console.log(filterCutoff);
+}, false);
+
+var volumeLevel = 1;
+var volumeInput = document.getElementById("volume");
+volumeInput.addEventListener("input", function() {
+	volumeLevel = volumeInput.value;
+	console.log(volumeLevel);
+}, false);
+
+
 var audioContext;
 if (typeof AudioContext !== "undefined") {
   audioContext = new AudioContext();
@@ -17,13 +32,13 @@ var source = audioContext.createMediaElementSource(mediaElement);	// Create an a
 
 // // // Creating a gain node
 var volume = audioContext.createGainNode();
-volume.gain.value = 0.1;
+volume.gain.value = volumeLevel;
 
 // // Creating a biquad filter node
 // // 5 fields: (type, frequency, detune, Q, gain)
 var filter = audioContext.createBiquadFilter();
 filter.type = 0; // 0 = lowpass, 1 = highpass, 2 = bandpass, 3 = lowshelf, 4 = highshelf, 5 = peaking, 6 = notch, 7 = allpass
-filter.frequency.value = 1000;
+filter.frequency.value = filterCutoff;
 
 
 
@@ -31,6 +46,25 @@ source.connect(volume);
 volume.connect(filter);
 filter.connect(audioContext.destination);
 
+
+function play() {
+	if (!playing) {
+		mediaElement.play();
+		playing = true;
+	}
+	else {
+		pause();
+	}
+}
+
+function pause() {
+	if (!mediaElement.muted) {
+		mediaElement.muted = true;
+	}
+	else {
+		mediaElement.muted = false;
+	}
+}
 
 
 

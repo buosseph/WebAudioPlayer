@@ -28,15 +28,17 @@ volumeInput.addEventListener("input", function() {
 var filterCutoff = 20000;
 var filterCutoffInput = document.getElementById("filter-cutoff");
 var filterType = 0;
-var filterTypeInput = document.getElementById("filter-type");
+var filterTypeSelect = document.getElementById("filter-type");
 var filter = audioContext.createBiquadFilter();
 filter.type = filterType; // 0 = lowpass, 1 = highpass, 2 = bandpass, 3 = lowshelf, 4 = highshelf, 5 = peaking, 6 = notch, 7 = allpass
 filter.frequency.value = filterCutoff;
-// Doesn't change?
-filterTypeInput.addEventListener("input", function() {
-	filterType = filterTypeInput.value;
+
+
+filterTypeSelect.addEventListener("change", function() {
+	filterType = parseInt(filterTypeSelect.options[filterTypeSelect.selectedIndex].value);
 	filter.type = filterType;
 }, false);
+
 filterCutoffInput.addEventListener("input", function() {
 	// Should convert from 0-100 to 0-20000
 	filterCutoff = filterCutoffInput.value;

@@ -13,14 +13,6 @@ var playing = false;
  *	- Square
  */
 
-var canvas = document.getElementById("webgl");
-if (canvas.getContext) {
-	var canvasContext = canvas.getContext('2d');
-	canvasContext.fillStyle = "rgb(0,255,0)";
-	canvasContext.fillRect(60,60,100,100);
-}
-
-
 var audioContext;
 if (typeof AudioContext !== "undefined") {
   audioContext = new AudioContext();
@@ -67,11 +59,55 @@ filterCutoffInput.addEventListener("input", function() {
 }, false);
 
 
+// Analyzer (FFT)
+var analyser = audioContext.createAnalyser();
+analyser.fftSize = 2048;
+// Use .getByteFrequencyData() for frequency spectrum
+// Use .getByteTimeDomainData() for waveforms
 
 
+
+// Connect all nodes
 source.connect(volume);
 volume.connect(filter);
-filter.connect(audioContext.destination);
+filter.connect(analyser);
+analyser.connect(audioContext.destination);
+
+
+
+var canvas = document.getElementById("canvas");
+var canvasContext;
+if (canvas.getContext) {
+	canvasContext = canvas.getContext('2d');
+	draw();
+}
+
+
+function draw() {
+	window.webkitRequestAnimationFrame(draw);
+
+	// FFT
+	var sum;
+	var average;
+	var bar_width;
+	var scaled_average;
+	var num_bars = 60;
+	var data = new Uint8Array(2048);
+	analyser.getByteFrequencyData(data)
+
+	canvasContext.clearRect(0, 0, canvas.width, canvas.height);
+	var bin_size = Math.floor(data.length / num_bars);
+	for (var i = 0; i < num_bars; i++) {
+		sum = 0;
+		for (var j = 0; j < bin_size; j++) {
+			sum += data[(i * bin_size) + j];
+		}
+		average = sum / bin_size;
+		bar_width = canvas.width / num_bars;
+		scaled_average = (average/ 256) * canvas.height;
+		canvasContext.fillRect(i * bar_width, canvas.height, bar_width - 2, - scaled_average);
+	}
+}
 
 
 function play() {

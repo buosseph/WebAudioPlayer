@@ -1,5 +1,26 @@
 var playing = false;
 
+/* Approach:
+ *	- Load all tracks through <audio>
+ *	- Create an array of audio tracks
+ *	- Give user controls to play/pause, skip track, volume and filter
+ *	- 
+ */
+
+/* Styling Ideas:
+ *	- Quantized spectrogram in background of player
+ *	- Album art?
+ *	- Square
+ */
+
+var canvas = document.getElementById("webgl");
+if (canvas.getContext) {
+	var canvasContext = canvas.getContext('2d');
+	canvasContext.fillStyle = "rgb(0,255,0)";
+	canvasContext.fillRect(60,60,100,100);
+}
+
+
 var audioContext;
 if (typeof AudioContext !== "undefined") {
   audioContext = new AudioContext();

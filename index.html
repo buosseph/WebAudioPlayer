@@ -8,18 +8,28 @@
 			<h1>Web Audio Player</h1>
 		</header>
 		<section>
-			<p>Audio Player Prototype, no where close to functional.</p>
+			<p>Audio Player Prototype, nowhere close to functional.</p>
 			<p>Notes:<br></p>
 			<ul>
 				<li>At least in Chrome, the mute paramter of the audio element is acts as a pause rather than muting the audio</li>
-				<li>Using the audio element simplifies loading, but doesn't seem to cooperate well with changing filter and volume values.
 			</ul>
 			<audio id="track1" src="Warrior Concerto - The Glitch Mob.mp3">
 				Looks like your browser doesn't support HTML5. You should update your browser!
 			</audio>
 			<input type="button" value="Play/Pause" onclick="play()"/>
-			<label>Filter: <input id="filter-cutoff" type="range" min="0" max="20000"/></label>
 			<label>Volume: <input id="volume" type="range" min="0" max="1" step="0.01" value="1"/></label>
+			<select name="Filter Type" id="filter-type">
+				<option value="0">Low pass</option>
+				<option value="1">High pass</option>
+				<option value="2">Bandpass</option>
+				<option value="3">Low Shelf</option>
+				<option value="4">High Shelf</option>
+				<option value="5">Peaking</option>
+				<option value="6">Notch</option>
+				<option value="7">Allpass</option>
+			</select>
+			<label>LP Filter Cutoff: <input id="filter-cutoff" type="range" min="0" max="20000" value="20000"/></label>
+
 
 		</section>
 		<footer>

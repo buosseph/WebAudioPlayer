@@ -53,8 +53,16 @@ filterTypeSelect.addEventListener("change", function() {
 }, false);
 
 filterCutoffInput.addEventListener("input", function() {
-	// Should convert from 0-100 to 0-20000
-	filterCutoff = filterCutoffInput.value;
+	// Map 0-1 to 0-20000
+	// ((e^(ln(81)x)) – 1) * 250 = x'
+	filterCutoff = parseInt(((Math.exp(Math.log(81)*parseFloat(filterCutoffInput.value))) - 1) * 250);
+	console.log(filterCutoff);
+	filter.frequency.value = filterCutoff;
+}, false);
+// To allow nudging with arrow keys
+filterCutoffInput.addEventListener("change", function() {
+	filterCutoff = parseInt(((Math.exp(Math.log(81)*parseFloat(filterCutoffInput.value))) - 1) * 250);
+	console.log(filterCutoff);
 	filter.frequency.value = filterCutoff;
 }, false);
 

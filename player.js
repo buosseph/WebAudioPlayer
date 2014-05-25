@@ -123,7 +123,6 @@ function draw() {
 	}
 }
 
-
 function getAllTrackSources(tracks) {
 	var sources = [];
 	for (var i = 0; i < tracks.length; i++) {
@@ -133,7 +132,6 @@ function getAllTrackSources(tracks) {
 	return sources;
 }
 
-
 function playback() {
 	if (!pausing) {
 		togglePlay();
@@ -142,7 +140,6 @@ function playback() {
 		togglePause();
 	}
 }
-
 function togglePlay() {
 	if (!playing) {
 		currentTrack.play();
@@ -152,21 +149,34 @@ function togglePlay() {
 		togglePause();
 	}
 }
-
 function togglePause() {
 	currentTrack.muted = !currentTrack.muted;
 	pausing = !pausing;
 	playing = !playing;
-	//console.log(playing); // For debugging overall play/pause toggle
+	//console.log(playing); // For debugging overall playing toggle
+}
+function resetTrack() {
+	currentTrack.play();
+	currentTrack.muted = false;
+	pausing = false;
+	playing = true;
 }
 
 function nextTrack() {
 	if (trackIndex + 1 >= tracks.length) {
 		// Should reload/restart last track in playlist
+		if (playing) {
+			togglePause();
+		}
+		currentSource.disconnect();
+		currentTrack = tracks[trackIndex];
+		currentSource = sources[trackIndex];
+		currentSource.connect(volume);
+		resetTrack();		
 	}
 	else {
 		if (playing) {
-			pause();
+			togglePause();
 		}
 
 		currentSource.disconnect();
@@ -175,6 +185,8 @@ function nextTrack() {
 		currentTrack = tracks[trackIndex];
 		currentSource = sources[trackIndex];
 		currentSource.connect(volume);
+
+		togglePlay();
 	}
 }
 

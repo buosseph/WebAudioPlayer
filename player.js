@@ -23,8 +23,10 @@ if (typeof AudioContext !== "undefined") {
   throw new Error("Web Audio API is not supported in this browser. :(");
 }
 
-var mediaElement = document.getElementById('track1');	// Grab <audio>, which has already loaded the song for us!
-var source = audioContext.createMediaElementSource(mediaElement);	// Create an audio source from <audio>
+//var mediaElement = document.getElementById('track1');	// Grab <audio>, which has already loaded the song for us!
+var tracks = document.getElementsByClassName("track");
+var currentTrack = tracks[0];
+var source = audioContext.createMediaElementSource(currentTrack);	// Create an audio source from <audio>
 
 
 // Gain
@@ -93,7 +95,7 @@ if (canvas.getContext) {
 
 
 function draw() {
-	window.webkitRequestAnimationFrame(draw);
+	window.requestAnimationFrame(draw);
 
 	// FFT
 	var sum;
@@ -121,7 +123,7 @@ function draw() {
 
 function play() {
 	if (!playing) {
-		mediaElement.play();
+		currentTrack.play();
 		playing = true;
 	}
 	else {
@@ -130,11 +132,11 @@ function play() {
 }
 
 function pause() {
-	if (!mediaElement.muted) {
-		mediaElement.muted = true;
+	if (!currentTrack.muted) {
+		currentTrack.muted = true;
 	}
 	else {
-		mediaElement.muted = false;
+		currentTrack.muted = false;
 	}
 }
 

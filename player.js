@@ -23,9 +23,9 @@ if (typeof AudioContext !== "undefined") {
   throw new Error("Web Audio API is not supported in this browser. :(");
 }
 
-//var mediaElement = document.getElementById('track1');	// Grab <audio>, which has already loaded the song for us!
 var tracks = document.getElementsByClassName("track");
-var currentTrack = tracks[0];
+var trackIndex = 0;
+var currentTrack = tracks[trackIndex];
 var source = audioContext.createMediaElementSource(currentTrack);	// Create an audio source from <audio>
 
 
@@ -59,13 +59,11 @@ filterCutoffInput.addEventListener("input", function() {
 	// Map 0-1 to 0-20000
 	// ((e^(ln(81)x)) – 1) * 250 = x'
 	filterCutoff = parseInt(((Math.exp(Math.log(81)*parseFloat(filterCutoffInput.value))) - 1) * 250);
-	console.log(filterCutoff);
 	filter.frequency.value = filterCutoff;
 }, false);
 // To allow nudging with arrow keys
 filterCutoffInput.addEventListener("change", function() {
 	filterCutoff = parseInt(((Math.exp(Math.log(81)*parseFloat(filterCutoffInput.value))) - 1) * 250);
-	console.log(filterCutoff);
 	filter.frequency.value = filterCutoff;
 }, false);
 
@@ -78,7 +76,7 @@ analyser.fftSize = 2048;
 
 
 
-// Connect all nodes
+
 source.connect(volume);
 volume.connect(filter);
 filter.connect(analyser);
@@ -97,7 +95,6 @@ if (canvas.getContext) {
 function draw() {
 	window.requestAnimationFrame(draw);
 
-	// FFT
 	var sum;
 	var average;
 	var bar_width;
@@ -128,6 +125,22 @@ function play() {
 	}
 	else {
 		pause();
+	}
+}
+
+
+function nextTrack() {
+	if (trackIndex + 1 >= tracks.length) {
+		// Should reload/restart last track in playlist
+	}
+	else {
+		if (playing) {
+			pause();
+		}
+		trackIndex++;
+		currentTrack = tracks[trackIndex];
+		source = audioContext.createMediaElementSource(currentTrack);
+		source.connect(volume);
 	}
 }
 

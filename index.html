@@ -47,6 +47,8 @@
 				<ul>
 					<li>At least in Chrome, the mute paramter of the audio element is acts as a pause rather than muting the audio</li>
 					<li>Look into using D3 or WebGL for spectrum visualization and filter representation</li>
+					<li>Can only skip to next track if first isn't played</li>
+					<li>Still need to figure out how to restart audio sources</li>
 				</ul>
 				<canvas id="canvas" width="512" height="240">
 					Looks like your brwoser doesn't support HTML5 <code>&lt;canvas&rt;</code>. You should update your browser!
@@ -70,7 +72,10 @@
 
 				
 
+				<input type="button" value="Prev" onclick="prevTrack()"/>
 				<input type="button" value="Play/Pause" onclick="play()"/>
+				<input type="button" value="Next" onclick="nextTrack()"/>
+				<br>
 				<label>Volume: <input id="volume" type="range" min="0" max="1" step="0.01" value="1"/></label>
 				<select name="Filter Type" id="filter-type">
 					<option value="0">Low pass</option>

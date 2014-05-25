@@ -1,4 +1,5 @@
 var playing = false;
+var pausing = false;
 
 /* Approach:
  *	- Load all tracks through <audio>
@@ -23,20 +24,26 @@ if (typeof AudioContext !== "undefined") {
   throw new Error("Web Audio API is not supported in this browser. :(");
 }
 
-var tracks = document.getElementsByClassName("track");
+
+
 var trackIndex = 0;
+var tracks = document.getElementsByClassName("track");
 var currentTrack = tracks[trackIndex];
-var source = audioContext.createMediaElementSource(currentTrack);	// Create an audio source from <audio>
+var sources = getAllTrackSources(tracks);
+var currentSource = sources[trackIndex];
+console.log(currentSource);
+
 
 
 // Gain
 var volumeLevel = 1;
 var volumeInput = document.getElementById("volume");
-var volume = audioContext.createGainNode();
+var volume = audioContext.createGain();
 volumeInput.addEventListener("input", function() {
 	volumeLevel = volumeInput.value;
 	volume.gain.value = volumeLevel;
 }, false);
+
 
 
 // Filter
@@ -48,12 +55,10 @@ var filter = audioContext.createBiquadFilter();
 filter.type = filterType; // 0 = lowpass, 1 = highpass, 2 = bandpass, 3 = lowshelf, 4 = highshelf, 5 = peaking, 6 = notch, 7 = allpass
 filter.frequency.value = filterCutoff;
 
-
 filterTypeSelect.addEventListener("change", function() {
 	filterType = parseInt(filterTypeSelect.options[filterTypeSelect.selectedIndex].value);
 	filter.type = filterType;
 }, false);
-
 
 filterCutoffInput.addEventListener("input", function() {
 	// Map 0-1 to 0-20000
@@ -68,6 +73,7 @@ filterCutoffInput.addEventListener("change", function() {
 }, false);
 
 
+
 // Analyzer (FFT)
 var analyser = audioContext.createAnalyser();
 analyser.fftSize = 2048;
@@ -77,7 +83,7 @@ analyser.fftSize = 2048;
 
 
 
-source.connect(volume);
+currentSource.connect(volume);
 volume.connect(filter);
 filter.connect(analyser);
 analyser.connect(audioContext.destination);
@@ -118,16 +124,41 @@ function draw() {
 }
 
 
-function play() {
+function getAllTrackSources(tracks) {
+	var sources = [];
+	for (var i = 0; i < tracks.length; i++) {
+		var source = audioContext.createMediaElementSource(tracks[i]);
+		sources[i] = source;
+	}
+	return sources;
+}
+
+
+function playback() {
+	if (!pausing) {
+		togglePlay();
+	}
+	else {
+		togglePause();
+	}
+}
+
+function togglePlay() {
 	if (!playing) {
 		currentTrack.play();
 		playing = true;
 	}
 	else {
-		pause();
+		togglePause();
 	}
 }
 
+function togglePause() {
+	currentTrack.muted = !currentTrack.muted;
+	pausing = !pausing;
+	playing = !playing;
+	//console.log(playing); // For debugging overall play/pause toggle
+}
 
 function nextTrack() {
 	if (trackIndex + 1 >= tracks.length) {
@@ -137,19 +168,14 @@ function nextTrack() {
 		if (playing) {
 			pause();
 		}
+
+		currentSource.disconnect();
+
 		trackIndex++;
 		currentTrack = tracks[trackIndex];
-		source = audioContext.createMediaElementSource(currentTrack);
-		source.connect(volume);
+		currentSource = sources[trackIndex];
+		currentSource.connect(volume);
 	}
 }
 
-function pause() {
-	if (!currentTrack.muted) {
-		currentTrack.muted = true;
-	}
-	else {
-		currentTrack.muted = false;
-	}
-}
 

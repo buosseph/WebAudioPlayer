@@ -52,6 +52,7 @@ filterTypeSelect.addEventListener("change", function() {
 	filter.type = filterType;
 }, false);
 
+
 filterCutoffInput.addEventListener("input", function() {
 	// Map 0-1 to 0-20000
 	// ((e^(ln(81)x)) – 1) * 250 = x'

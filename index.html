@@ -48,13 +48,28 @@
 					<li>At least in Chrome, the mute paramter of the audio element is acts as a pause rather than muting the audio</li>
 					<li>Look into using D3 or WebGL for spectrum visualization and filter representation</li>
 				</ul>
-				<canvas id="canvas" width="320" height="240">
+				<canvas id="canvas" width="512" height="240">
 					Looks like your brwoser doesn't support HTML5 <code>&lt;canvas&rt;</code>. You should update your browser!
 				</canvas>
 				<br>
-				<audio id="track1" src="Warrior Concerto - The Glitch Mob.mp3">
-					Looks like your browser doesn't support HTML5 <code>&lt;audio&rt;</code>. You should update your browser!
-				</audio>
+
+				<ul>
+					<li>
+						<p>Warrior Concerto - The Glitch Mob</p>
+						<audio id="track1" src="Warrior Concerto - The Glitch Mob.mp3">
+							Looks like your browser doesn't support HTML5 <code>&lt;audio&rt;</code>. You should update your browser!
+						</audio>						
+					</li>
+					<li>
+						<p>Two Coins (City &amp; Colour Cover) - FLXXDS</p>
+						<audio id="track2" src="Two Coins (City &amp; Colour Cover) - FLXXDS.mp3">
+							Looks like your browser doesn't support HTML5 <code>&lt;audio&rt;</code>. You should update your browser!
+						</audio>						
+					</li>
+				</ul>
+
+				
+
 				<input type="button" value="Play/Pause" onclick="play()"/>
 				<label>Volume: <input id="volume" type="range" min="0" max="1" step="0.01" value="1"/></label>
 				<select name="Filter Type" id="filter-type">

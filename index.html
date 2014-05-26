@@ -33,13 +33,19 @@
 				padding: 2%;
 				display: block;
 			}
+			.title {
+				margin: 0;
+			}
 		</style>
 	</head>
 	<body>
 		<div class="bkgd-img"></div>
 		<div class="container">
 			<header>
-			<h1>Web Audio Player</h1>
+				<hgroup>
+					<h1 class="title">Web Audio Player</h1>
+					<h4 class="tagline">An audio player utilizing the Web Audio API</h4>
+				</hgroup>
 			</header>
 			<section>
 				<p>Audio Player Prototype, nowhere close to functional.</p>
@@ -47,7 +53,6 @@
 				<ul>
 					<li>At least in Chrome, the mute paramter of the audio element is acts as a pause rather than muting the audio</li>
 					<li>Look into using D3 or WebGL for spectrum visualization and filter representation</li>
-					<li>Can only skip to next track if first isn't played</li>
 					<li>Still need to figure out how to restart audio sources</li>
 				</ul>
 				<canvas id="canvas" width="512" height="240">

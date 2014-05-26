@@ -162,6 +162,32 @@ function resetTrack() {
 	playing = true;
 }
 
+function prevTrack() {
+	if (trackIndex - 1 < 0) {
+		if (playing) {
+			togglePause();
+		}
+		currentSource.disconnect();
+		currentTrack = tracks[trackIndex];
+		currentSource =sources[trackIndex];
+		currentSource.connect(volume);
+		resetTrack();
+	}
+	else {
+		if (playing) {
+			togglePause();
+		}
+		currentSource.disconnect();
+
+		trackIndex--;
+		currentTrack = tracks[trackIndex];
+		currentSource = sources[trackIndex];
+		currentSource.connect(volume);
+
+		resetTrack();
+	}
+}
+
 function nextTrack() {
 	if (trackIndex + 1 >= tracks.length) {
 		// Should reload/restart last track in playlist
@@ -186,7 +212,7 @@ function nextTrack() {
 		currentSource = sources[trackIndex];
 		currentSource.connect(volume);
 
-		togglePlay();
+		resetTrack();
 	}
 }
 

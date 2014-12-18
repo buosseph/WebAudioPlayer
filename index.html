@@ -10,10 +10,15 @@
 		<section id="app"></section>
 
 		<script type="text/template" id="app_template">
-			<div id="playlist" class="container">
+			<div class="container">
 				<canvas id="canvas" width="512" height="240">
 					Looks like your brwoser does not support HTML5 <code>&lt;canvas&rt;</code>. You should update your browser!
 				</canvas>
+
+				<div id="playlist">
+					Drop files here
+				</div>
+				<output id="list"></output>
 				<aside>
 					<select name="Filter Type" id="filter-type">
 						<option value="0">Low pass</option>

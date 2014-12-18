@@ -2,103 +2,45 @@
 <html>
 	<head>
 		<title>Web Audio Player</title>
-		<style type="text/css">
-			h1, h2, h3, h4, h5, h6, p {
-				margin-top: 0;
-			}
-			.bkgd-img {
-				background: #000000 url('http://i1.sndcdn.com/artworks-000057241667-rzm57l-original.jpg?30a2558') no-repeat center center;
-				-webkit-filter: blur(2px);
-				-moz-filter: blur(2px);
-				-ms-filter: blur(2px);
-				-o-filter: blur(2px);
-				filter: blur(2px);
-				height: 100%;
-				width: 100%;
-				position: fixed;
-				left: 0;
-				right: 0;
-				top: 0;
-				display: block;
-				z-index: 1;
-			}
-			.container {
-				z-index: 9999;
-				position: absolute;
-				background: rgba(255, 255,255, 0.7);
-				top: 0;
-				right: 23%;
-				left: 23%;
-				width: 50%;
-				padding: 2%;
-				display: block;
-			}
-			.title {
-				margin: 0;
-			}
-		</style>
+		<meta charset="utf-8">
+		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"/>
+		<link rel="stylesheet" href="css/style.css" />
 	</head>
 	<body>
-		<div class="bkgd-img"></div>
-		<div class="container">
-			<header>
-				<hgroup>
-					<h1 class="title">Web Audio Player</h1>
-					<h4 class="tagline">An audio player utilizing the Web Audio API</h4>
-				</hgroup>
-			</header>
-			<section>
-				<p>Audio Player Prototype, nowhere close to functional.</p>
-				<p>Notes:<br></p>
-				<ul>
-					<li>At least in Chrome, the mute paramter of the audio element is acts as a pause rather than muting the audio</li>
-					<li>Look into using D3 or WebGL for spectrum visualization and filter representation</li>
-					<li>Still need to figure out how to restart audio sources</li>
-				</ul>
+		<section id="app"></section>
+
+		<script type="text/template" id="app_template">
+			<div id="playlist" class="container">
 				<canvas id="canvas" width="512" height="240">
-					Looks like your brwoser doesn't support HTML5 <code>&lt;canvas&rt;</code>. You should update your browser!
+					Looks like your brwoser does not support HTML5 <code>&lt;canvas&rt;</code>. You should update your browser!
 				</canvas>
-				<br>
-
-				<ul>
-					<li>
-						<p>Warrior Concerto - The Glitch Mob</p>
-						<audio class="track" src="Warrior Concerto - The Glitch Mob.mp3">
-							Looks like your browser doesn't support HTML5 <code>&lt;audio&rt;</code>. You should update your browser!
-						</audio>						
-					</li>
-					<li>
-						<p>Two Coins (City &amp; Colour Cover) - FLXXDS</p>
-						<audio class="track" src="Two Coins (City &amp; Colour Cover) - FLXXDS.mp3">
-							Looks like your browser doesn't support HTML5 <code>&lt;audio&rt;</code>. You should update your browser!
-						</audio>						
-					</li>
-				</ul>
-
-				
-
-				<input type="button" value="Prev" onclick="prevTrack()"/>
-				<input type="button" value="Play/Pause" onclick="playback()"/>
-				<input type="button" value="Next" onclick="nextTrack()"/>
-				<br>
-				<label>Volume: <input id="volume" type="range" min="0" max="1" step="0.01" value="1"/></label>
-				<select name="Filter Type" id="filter-type">
-					<option value="0">Low pass</option>
-					<option value="1">High pass</option>
-					<option value="2">Bandpass</option>
-					<option value="3">Low Shelf</option>
-					<option value="4">High Shelf</option>
-					<option value="5">Peaking</option>
-					<option value="6">Notch</option>
-					<option value="7">Allpass</option>
-				</select>
-				<label>LP Filter Cutoff: <input id="filter-cutoff" type="range" min="0" max="1" value="1" step=".01"/></label>
-
-
-			</section>
-			<footer>
+				<aside>
+					<select name="Filter Type" id="filter-type">
+						<option value="0">Low pass</option>
+						<option value="1">High pass</option>
+						<option value="2">Bandpass</option>
+						<option value="3">Low Shelf</option>
+						<option value="4">High Shelf</option>
+						<option value="5">Peaking</option>
+						<option value="6">Notch</option>
+						<option value="7">Allpass</option>
+					</select>
+					<label>LP Filter Cutoff: <input id="filter-cutoff" type="range" min="0" max="1" value="1" step=".01"/></label>
+				</aside>
+			</div>
+			<footer id="playbar">
+				<div class="container">
+					<input type="button" value="Prev" onclick="prevTrack()"/>
+					<input type="button" value="Play/Pause" onclick="playback()"/>
+					<input type="button" value="Next" onclick="nextTrack()"/>
+					<label>Volume: <input id="volume" type="range" min="0" max="1" step="0.01" value="1"/></label>
+				</div>
 			</footer>
-		</div>
-		<script src="player.js"></script>
+		</script>
+
+		<script src="https://code.jquery.com/jquery-2.1.2.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.7.0/underscore-min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.2/backbone-min.js"></script>
+		<script src="js/app.js"></script>
 	</body>
 </html>

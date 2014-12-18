@@ -6,7 +6,6 @@ function handleFileSelect(event) {
 	event.originalEvent.preventDefault();
 
 	var files = event.originalEvent.dataTransfer.files;
-	var output = [];
 	for (var i = 0, f; f = files[i]; i++) {
 		var track = new app.Track({
 			title: 	f.name,
@@ -26,19 +25,18 @@ function handleDragOver(event) {
 
 app.AppView = Backbone.View.extend({
 	el: '#app',
+	template: _.template($("#app_template").html()),
 	initialize: function() {
 		this.listenTo(app.Tracklist, "add", this.addTrack);
 		this.listenTo(app.Tracklist, "remove", this.removeTrack);
-
 		this.render();
 	},
 	render: function() {
-		var template = _.template( $("#app_template").html() );
-		this.$el.html(template);
+		this.$el.html(this.template);
 	},
 	events: {
-		"dragover #playlist": 	"handleDragOver",
-		"drop #playlist": 		"handleFiles"
+		"dragover #playlist" 	: "handleDragOver",
+		"drop #playlist" 		: "handleFiles"
 	},
 	handleDragOver: function(event) {
 		handleDragOver(event);
@@ -49,11 +47,13 @@ app.AppView = Backbone.View.extend({
 		handleFileSelect(event);
 	},
 	addTrack: function(track) {
-		console.log("Track added " + app.Tracklist.length);
 		var view = new app.TrackView({model: track})
-		this.$("#playlist").append(view.render().$el);
+		$("#playlist").append(view.render().$el);
 	},
 	removeTrack: function() {
-		console.log("Track removed " + app.Tracklist.length);
+		if (app.Tracklist.length == 0) {
+			$("#playlist").addClass("empty-playlist");
+			$("#playlist").append("Drop files here");
+		}
 	}
 });

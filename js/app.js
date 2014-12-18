@@ -1,8 +1,6 @@
 /* Notes:
  * - Need overlay on top of #playlist on dragover to indicate adding of files
- * - Duplicates should show up. Every item in the collection should be visible
- * - Must be able to identify when #playlist is empty
- * - Finish simple file display and handling in #playlist before reimplementing audio
+ * - Dropping new files deletes the TrackViews of previous files, making them inaccessable. Fix this.
  */
 
 var app = app || {};

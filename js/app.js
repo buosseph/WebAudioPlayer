@@ -64,13 +64,32 @@ function handleDragOver(event) {
 	});
 
 	// Views
+	TrackView = Backbone.View.extend({
+		tagName: "li",
+		className: "track",
+		template: 	_.template($("#track_template").html()),
+		events: {
+			'click a.remove': 'removeTrack'
+		},
+		initialize: function() {
+			this.listenTo(this.model, 'change', this.render);
+			this.listenTo(this.model, 'destroy', this.remove);
+		},
+		render: function() {
+			this.$el.html(this.template(this.model.toJSON()));
+			return this;
+		},
+		removeTrack: function() {
+			this.model.destroy();
+		}
+	});
+
 	AppView = Backbone.View.extend({
 		el: '#app',
 		initialize: function() {
 			playlist = new Playlist();
-			playlist.on("add", function(track) {
-				console.log(playlist.length);
-			});
+			this.listenTo(playlist, "add", this.addTrack);
+			this.listenTo(playlist, "remove", this.removeTrack);
 
 			this.render();
 		},
@@ -90,10 +109,13 @@ function handleDragOver(event) {
 			handleFileSelect(event);
 		},
 		addTrack: function(track) {
-			console.log("pushing track");
-			// var trackView = new TrackView({model: track});
+			console.log("Track added " + playlist.length);
+			var view = new TrackView({model: track})
+			this.$("#playlist").append(view.render().$el);
 		},
-
+		removeTrack: function() {
+			console.log("Track removed " + playlist.length);
+		}
 	});
 
 	var app = new AppView();

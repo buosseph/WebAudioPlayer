@@ -1,3 +1,10 @@
+/* Notes:
+ * - Need overlay on top of #playlist on dragover to indicate adding of files
+ * - Duplicates should show up. Every item in the collection should be visible
+ * - Must be able to identify when #playlist is empty
+ * - Finish simple file display and handling in #playlist before reimplementing audio
+ */
+
 // Globals
 var playlist;
 
@@ -17,20 +24,13 @@ function handleFileSelect(event) {
 	var files = event.originalEvent.dataTransfer.files;
 	var output = [];
 	for (var i = 0, f; f = files[i]; i++) {
-		// output.push('<li><strong>', escape(f.name), '</strong> (', f.type || 'n/a', ') - ',
-		// 	f.size, ' bytes, last modified: ',
-		// 	f.lastModifiedDate ? f.lastModifiedDate.toLocaleDateString() : 'n/a',
-		// 	'</li>');
-
 		var track = new Track({
 			title: 	f.name,
 			type: 	f.type,
 			size: 	f.size,
 		});
-
 		this.playlist.push(track);
 	}
-	// $('#list').html('<ul>' + output.join(' ') + '</ul>');
 }
 
 function handleDragOver(event) {
@@ -106,6 +106,7 @@ function handleDragOver(event) {
 		},
 		handleFiles: function(event) {
 			$("#playlist").empty();
+			$("#playlist").removeClass("empty-playlist");
 			handleFileSelect(event);
 		},
 		addTrack: function(track) {

@@ -1,3 +1,15 @@
 body {
 	background-color: #999;
 }
+
+#playlist {
+	margin: 0;
+	padding: 0;
+	min-height: 240px;
+}
+
+/* Temporary centering */
+.empty-playlist {
+	text-align: center;
+	padding: 120px 0;
+}

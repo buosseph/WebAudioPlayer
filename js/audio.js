@@ -15,11 +15,17 @@ if (!window.AudioContext) {
 
 app.audio = new AudioContext();
 app.source = null;
+app.analyser = null;
 
 function connectAndPlayNode(node) {
 	if (node != null) {
 		app.source = node;
 		app.source.connect(app.audio.destination);
+
+		if (app.analyser != null) {
+			app.source.connect(app.analyser);
+		}
+
 		app.source.start(0);
 	}
 }
@@ -28,4 +34,10 @@ function stopSourceNode() {
 	if (app.source != null) {
 		app.source.stop();
 	}
+}
+
+function setUpSpectrumAnalyserNode() {
+	app.analyser = app.audio.createAnalyser();
+	app.analyser.smoothingTimeConstant = 0.5;
+	app.analyser.fftSize = 2048;
 }

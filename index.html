@@ -11,12 +11,12 @@
 
 		<script type="text/template" id="app_template">
 			<div class="container">
-				<canvas id="canvas" width="512" height="240" style="display: none">
-					Looks like your brwoser does not support HTML5 <code>&lt;canvas&rt;</code>. You should update your browser!
-				</canvas>
 				<ul id="playlist" class="empty-playlist">
 					Drop files here
 				</ul>
+				<canvas id="spectrum" width="512" height="240">
+					Looks like your browser does not support HTML5 <code>&lt;canvas&rt;</code>. You should upgrade your browser!
+				</canvas>
 				<aside style="display: none">
 					<select name="Filter Type" id="filter-type">
 						<option value="0">Low pass</option>
@@ -49,15 +49,23 @@
 			</a>
 			<a class="remove">Remove</a>
 		</script>
+		<script type="text/template" id="spectrum_template">
+			<canvas id="spectrum" width="512" height="240">
+				Looks like your browser does not support HTML5 <code>&lt;canvas&rt;</code>. You should upgrade your browser!
+			</canvas>
+		</script>
 
 		<script src="https://code.jquery.com/jquery-2.1.2.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.7.0/underscore-min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.2/backbone-min.js"></script>
 
 		<script src="js/models/track.js"></script>
+		<script src="js/models/spectrum.js"></script>
 		<script src="js/collections/tracklist.js"></script>
 		<script src="js/views/track.js"></script>
 		<script src="js/views/app.js"></script>
+		<script src="js/views/spectrum.js"></script>
+
 		<script src="js/audio.js"></script>
 		<script src="js/app.js"></script>
 	</body>

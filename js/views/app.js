@@ -69,6 +69,8 @@ app.AppView = Backbone.View.extend({
 	},
 	render: function() {
 		this.$el.html(this.template);
+		var v = new app.SpectrumView({el: $("#spectrum")});
+		v.render();
 	},
 	events: {
 		"dragover #playlist" 	: "handleDragOver",

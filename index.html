@@ -40,11 +40,13 @@
 				</div>
 			</footer>
 		</script>
-		<script type="text/template" id="track_template">
+		<script type="text/template" id="track_queue_template">
 			<%= title %>
-			<%= type %>
-			<%= size %>
-			Playing <%= playing %>
+			<%= length %>
+			<a class=
+				<%= playing ? "\"stop\"" : "\"play\"" %>>
+				<%= playing ? "Stop" : "Play" %>
+			</a>
 			<a class="remove">Remove</a>
 		</script>
 

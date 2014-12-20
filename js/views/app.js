@@ -1,5 +1,20 @@
 var app = app || {};
-var tempBuffer = null;
+
+function toTimeLength(totalSeconds) {
+	// totalSeconds should be a decimal value already
+	var hours 	= Math.floor(totalSeconds/ 3600);
+	var minutes = Math.floor((totalSeconds - (hours * 3600)) / 60);
+	var seconds = Math.floor(totalSeconds - (hours * 3600) - (minutes * 60));
+
+	if (minutes < 10 && hours > 0) {
+		minutes = ":0" + minutes;
+	}
+	if (seconds < 10) {
+		seconds = "0" + seconds;
+	}
+
+	return hours + minutes + ":" + seconds;
+}
 
 function handleFileSelect(event) {
 	// Need access to original event if abstracting this function outside of AppView
@@ -16,11 +31,18 @@ function handleFileSelect(event) {
 		reader.onload = (function(f){
 			return function(event) {
 				app.audio.decodeAudioData(event.target.result, function(buffer) {
+					var node = app.audio.createBufferSource();
+					node.buffer = buffer;
+
+					var length =  toTimeLength(buffer.duration);
+					console.log(length);
 					var track = new app.Track({
 						title: 	f.name,
 						type: 	f.type,
 						size: 	f.size,
-						buffer: buffer
+						length: length,
+						buffer: buffer,
+						node:   node,
 					});
 					app.Tracklist.push(track);
 				});
@@ -63,11 +85,6 @@ app.AppView = Backbone.View.extend({
 	addTrack: function(track) {
 		var view = new app.TrackView({model: track})
 		$("#playlist").append(view.render().$el);
-
-		// To test if audio works, which it does
-		// app.source.connect(app.audio.destination);
-		// app.source.buffer = app.Tracklist.at(0).get("buffer");
-		// app.source.start(0);
 	},
 	removeTrack: function() {
 		if (app.Tracklist.length == 0) {

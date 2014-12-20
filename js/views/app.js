@@ -41,7 +41,6 @@ app.AppView = Backbone.View.extend({
 	el: '#app',
 	template: _.template($("#app_template").html()),
 	initialize: function() {
-		// console.log(app.audio);
 		this.listenTo(app.Tracklist, "add", this.addTrack);
 		this.listenTo(app.Tracklist, "remove", this.removeTrack);
 		this.render();

@@ -17,7 +17,7 @@
 			</div>
 
 			
-			<div class="slideout-panel from-left">
+			<div id="file-drop" class="slideout-panel from-left">
 				<div class="slideout-panel-container">
 					<header class="slideout-panel-header">
 						File Queue
@@ -30,7 +30,7 @@
 				</div>
 			</div>
 
-			<div class="slideout-panel">
+			<div id="audio-control" class="slideout-panel">
 				<div class="slideout-panel-container">
 					<header class="slideout-panel-header">
 						Audio Controls
@@ -53,6 +53,9 @@
 
 			<footer id="playbar">
 				<div class="container">
+					<input type="button" id="left-panel-ctl" value="File Drop"/>
+					<input type="button" id="right-panel-ctl" value="Audio Controls"/>
+
 					<input type="button" value="Prev" onclick="prevTrack()"/>
 					<input type="button" value="Play/Pause" onclick="playback()"/>
 					<input type="button" value="Next" onclick="nextTrack()"/>

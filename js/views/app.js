@@ -74,7 +74,9 @@ app.AppView = Backbone.View.extend({
 	},
 	events: {
 		"dragover #playlist" 	: "handleDragOver",
-		"drop #playlist" 		: "handleFiles"
+		"drop #playlist" 		: "handleFiles",
+		"click #left-panel-ctl" : "toggleFileDrop",
+		"click #right-panel-ctl": "toggleAudioCtl"
 	},
 	handleDragOver: function(event) {
 		handleDragOver(event);
@@ -93,5 +95,11 @@ app.AppView = Backbone.View.extend({
 			$("#playlist").addClass("empty-playlist");
 			$("#playlist").append("Drop files here");
 		}
+	},
+	toggleFileDrop: function() {
+		$("#file-drop").toggleClass("is-visible");
+	},
+	toggleAudioCtl: function() {
+		$("#audio-control").toggleClass("is-visible");
 	}
 });

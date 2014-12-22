@@ -10,27 +10,47 @@
 		<section id="app"></section>
 
 		<script type="text/template" id="app_template">
-			<div class="container">
-				<ul id="playlist" class="empty-playlist">
-					Drop files here
-				</ul>
+			<div class="visualization">
 				<canvas id="spectrum" width="512" height="240">
 					Looks like your browser does not support HTML5 <code>&lt;canvas&rt;</code>. You should upgrade your browser!
 				</canvas>
-				<aside style="display: none">
-					<select name="Filter Type" id="filter-type">
-						<option value="0">Low pass</option>
-						<option value="1">High pass</option>
-						<option value="2">Bandpass</option>
-						<option value="3">Low Shelf</option>
-						<option value="4">High Shelf</option>
-						<option value="5">Peaking</option>
-						<option value="6">Notch</option>
-						<option value="7">Allpass</option>
-					</select>
-					<label>LP Filter Cutoff: <input id="filter-cutoff" type="range" min="0" max="1" value="1" step=".01"/></label>
-				</aside>
 			</div>
+
+			
+			<div class="slideout-panel from-left">
+				<div class="slideout-panel-container">
+					<header class="slideout-panel-header">
+						File Queue
+					</header>
+					<div class="slideout-panel-content">
+						<ul id="playlist" class="empty-playlist">
+							Drop audio files here
+						</ul>
+					</div>
+				</div>
+			</div>
+
+			<div class="slideout-panel">
+				<div class="slideout-panel-container">
+					<header class="slideout-panel-header">
+						Audio Controls
+					</header>
+					<div class="slideout-panel-content">
+						<select name="Filter Type" id="filter-type">
+							<option value="0">Low pass</option>
+							<option value="1">High pass</option>
+							<option value="2">Bandpass</option>
+							<option value="3">Low Shelf</option>
+							<option value="4">High Shelf</option>
+							<option value="5">Peaking</option>
+							<option value="6">Notch</option>
+							<option value="7">Allpass</option>
+						</select>
+						<label>LP Filter Cutoff: <input id="filter-cutoff" type="range" min="0" max="1" value="1" step=".01"/></label>
+					</div>
+				</div>
+			</div>
+
 			<footer id="playbar">
 				<div class="container">
 					<input type="button" value="Prev" onclick="prevTrack()"/>

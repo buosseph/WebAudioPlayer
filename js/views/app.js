@@ -79,7 +79,10 @@ app.AppView = Backbone.View.extend({
 		"click #file-drop .slideout-panel-close" : "toggleFileDrop",
 		"click #right-panel-ctl": "toggleAudioCtl",
 		"click #audio-control .slideout-panel-close": "toggleAudioCtl",
-		"input #volume": "changeVolume"
+		"input #volume": "changeVolume",
+		"input #filter-cutoff": "changeFilterCutoff",
+		"change #filter-cutoff": "changeFilterCutoff",
+		"input #filter-type": "changeFilter"
 	},
 	handleDragOver: function(event) {
 		handleDragOver(event);
@@ -108,5 +111,14 @@ app.AppView = Backbone.View.extend({
 	changeVolume: function() {
 		app.volume.gain.value = $("#volume").val();
 		console.log(app.volume.gain.value);
+	},
+	changeFilterCutoff: function() {
+		// Convert to log scale
+		var filterCutoff = parseInt(((Math.exp(Math.log(81)*parseFloat($("#filter-cutoff").val()))) - 1) * 250);
+		app.filter.frequency.value = filterCutoff;
+	},
+	changeFilter: function() {
+		var filterType = $("#filter-type option:selected").val()
+		app.filter.type = filterType;
 	}
 });

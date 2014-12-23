@@ -16,24 +16,23 @@ if (!window.AudioContext) {
 app.audio = new AudioContext();
 app.source = null;
 app.analyser = null;
+
 app.volume = app.audio.createGain();
 
-function setVolume(gain) {
-	app.volume.gain.value = gain;
-	console.log(app.volume.gain.value);
-}
+app.filter = app.audio.createBiquadFilter();
+app.filter.type = 0; // 0 = lowpass, 1 = highpass, 2 = bandpass, 3 = lowshelf, 4 = highshelf, 5 = peaking, 6 = notch, 7 = allpass
+app.filter.frequency.value = 20000;
 
 function connectAndPlayNode(node) {
 	if (node != null) {
 		app.source = node;
 		
-		if (app.volume != null) {
-			app.source.connect(app.volume);
-			app.volume.connect(app.audio.destination);
-		}
+		app.source.connect(app.filter);
+		app.filter.connect(app.volume);
+		app.volume.connect(app.audio.destination);
 
 		if (app.analyser != null) {
-			app.source.connect(app.analyser);
+			app.volume.connect(app.analyser);
 		}
 
 		app.source.start(0);

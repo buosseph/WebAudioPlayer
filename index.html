@@ -47,14 +47,14 @@
 					</header>
 					<div class="slideout-panel-content">
 						<select name="Filter Type" id="filter-type">
-							<option value="0">Low pass</option>
-							<option value="1">High pass</option>
-							<option value="2">Bandpass</option>
-							<option value="3">Low Shelf</option>
-							<option value="4">High Shelf</option>
-							<option value="5">Peaking</option>
-							<option value="6">Notch</option>
-							<option value="7">Allpass</option>
+							<option value="lowpass">Low pass</option>
+							<option value="highpass">High pass</option>
+							<option value="bandpass">Bandpass</option>
+							<option value="lowshelf">Low Shelf</option>
+							<option value="highshelf">High Shelf</option>
+							<option value="peaking">Peaking</option>
+							<option value="notch">Notch</option>
+							<option value="allpass">Allpass</option>
 						</select>
 						<label>LP Filter Cutoff: <input id="filter-cutoff" type="range" min="0" max="1" value="1" step=".01"/></label>
 					</div>
@@ -91,7 +91,6 @@
 
 		<script src="js/models/track.js"></script>
 		<script src="js/models/spectrum.js"></script>
-		<script src="js/models/volume.js"></script>
 		<script src="js/collections/tracklist.js"></script>
 		<script src="js/views/track.js"></script>
 		<script src="js/views/app.js"></script>

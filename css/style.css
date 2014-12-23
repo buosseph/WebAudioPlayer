@@ -27,6 +27,24 @@ body {
 	text-align: left;
 }
 
+.slideout-panel-title {
+	margin: 0;
+	line-height: 50px;
+	height: 100%;
+	padding: 0 0 0 20px;
+}
+
+.slideout-panel-close {
+	position: absolute;
+	display: inline-block;
+	top: 0;
+	right: 0;
+	height: 100%;
+	width: 60px;
+	text-align: center;
+	line-height: 50px;
+}
+
 .slideout-panel {
 	visibility: hidden;
 	transition: visibility 0s 0.6s;
@@ -103,6 +121,7 @@ li.track {
 	background: #222;
 	color: #E2E2E2;
 	line-height: 42px;
+	font-size: 12px;
 }
 
 li.playing {

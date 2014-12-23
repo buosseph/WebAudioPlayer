@@ -76,7 +76,9 @@ app.AppView = Backbone.View.extend({
 		"dragover #playlist" 	: "handleDragOver",
 		"drop #playlist" 		: "handleFiles",
 		"click #left-panel-ctl" : "toggleFileDrop",
-		"click #right-panel-ctl": "toggleAudioCtl"
+		"click #file-drop .slideout-panel-close" : "toggleFileDrop",
+		"click #right-panel-ctl": "toggleAudioCtl",
+		"click #audio-control .slideout-panel-close": "toggleAudioCtl"
 	},
 	handleDragOver: function(event) {
 		handleDragOver(event);

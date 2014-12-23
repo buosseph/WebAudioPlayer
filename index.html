@@ -20,7 +20,12 @@
 			<div id="file-drop" class="slideout-panel from-left">
 				<div class="slideout-panel-container">
 					<header class="slideout-panel-header">
-						File Queue
+						<h3 class="slideout-panel-title">
+							File Queue
+						</h3>
+						<a class="slideout-panel-close">
+							Close
+						</a>
 					</header>
 					<div class="slideout-panel-content">
 						<ul id="playlist" class="empty-playlist">
@@ -33,7 +38,12 @@
 			<div id="audio-control" class="slideout-panel">
 				<div class="slideout-panel-container">
 					<header class="slideout-panel-header">
-						Audio Controls
+						<h3 class="slideout-panel-title">
+							Audio Controls
+						</h3>
+						<a class="slideout-panel-close">
+							Close
+						</a>
 					</header>
 					<div class="slideout-panel-content">
 						<select name="Filter Type" id="filter-type">
@@ -56,9 +66,6 @@
 					<input type="button" id="left-panel-ctl" value="File Drop"/>
 					<input type="button" id="right-panel-ctl" value="Audio Controls"/>
 
-					<input type="button" value="Prev" onclick="prevTrack()"/>
-					<input type="button" value="Play/Pause" onclick="playback()"/>
-					<input type="button" value="Next" onclick="nextTrack()"/>
 					<label>Volume: <input id="volume" type="range" min="0" max="1" step="0.01" value="1"/></label>
 				</div>
 			</footer>

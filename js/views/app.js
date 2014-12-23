@@ -78,7 +78,8 @@ app.AppView = Backbone.View.extend({
 		"click #left-panel-ctl" : "toggleFileDrop",
 		"click #file-drop .slideout-panel-close" : "toggleFileDrop",
 		"click #right-panel-ctl": "toggleAudioCtl",
-		"click #audio-control .slideout-panel-close": "toggleAudioCtl"
+		"click #audio-control .slideout-panel-close": "toggleAudioCtl",
+		"input #volume": "changeVolume"
 	},
 	handleDragOver: function(event) {
 		handleDragOver(event);
@@ -103,5 +104,9 @@ app.AppView = Backbone.View.extend({
 	},
 	toggleAudioCtl: function() {
 		$("#audio-control").toggleClass("is-visible");
+	},
+	changeVolume: function() {
+		app.volume.gain.value = $("#volume").val();
+		console.log(app.volume.gain.value);
 	}
 });

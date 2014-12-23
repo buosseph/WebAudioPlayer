@@ -16,11 +16,21 @@ if (!window.AudioContext) {
 app.audio = new AudioContext();
 app.source = null;
 app.analyser = null;
+app.volume = app.audio.createGain();
+
+function setVolume(gain) {
+	app.volume.gain.value = gain;
+	console.log(app.volume.gain.value);
+}
 
 function connectAndPlayNode(node) {
 	if (node != null) {
 		app.source = node;
-		app.source.connect(app.audio.destination);
+		
+		if (app.volume != null) {
+			app.source.connect(app.volume);
+			app.volume.connect(app.audio.destination);
+		}
 
 		if (app.analyser != null) {
 			app.source.connect(app.analyser);

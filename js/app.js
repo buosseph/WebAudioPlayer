@@ -1,8 +1,3 @@
-/* Notes:
- * - Need overlay on top of #playlist on dragover to indicate adding of files
- * - Dropping new files deletes the TrackViews of previous files, making them inaccessable. Fix this.
- */
-
 var app = app || {};
 
 if (window.File && window.FileReader && window.FileList && window.Blob) {

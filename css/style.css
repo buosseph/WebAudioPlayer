@@ -105,6 +105,8 @@ body {
 	padding: 0;
 	min-height: 240px;
 	color: #D0D0D0;
+	max-height: 470px;
+	overflow-y: scroll;
 }
 
 /* Temporary centering */

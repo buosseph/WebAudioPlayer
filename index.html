@@ -18,21 +18,6 @@
 
 			
 			<div id="file-drop" class="slideout-panel from-left">
-				<div class="slideout-panel-container">
-					<header class="slideout-panel-header">
-						<h3 class="slideout-panel-title">
-							File Queue
-						</h3>
-						<a class="slideout-panel-close">
-							Close
-						</a>
-					</header>
-					<div class="slideout-panel-content">
-						<ul id="playlist" class="empty-playlist">
-							Drop audio files here
-						</ul>
-					</div>
-				</div>
 			</div>
 
 			<div id="audio-control" class="slideout-panel">
@@ -70,6 +55,23 @@
 				</div>
 			</footer>
 		</script>
+		<script type="text/template" id="tracklist_template">
+			<div class="slideout-panel-container">
+				<header class="slideout-panel-header">
+					<h3 class="slideout-panel-title">
+						File Queue
+					</h3>
+					<a class="slideout-panel-close">
+						Close
+					</a>
+				</header>
+				<div class="slideout-panel-content">
+					<ul id="playlist" class="empty-playlist">
+						Drop audio files here
+					</ul>
+				</div>
+			</div>
+		</script>
 		<script type="text/template" id="track_queue_template">
 			<%= title %>
 			<%= length %>
@@ -93,6 +95,7 @@
 		<script src="js/models/spectrum.js"></script>
 		<script src="js/collections/tracklist.js"></script>
 		<script src="js/views/track.js"></script>
+		<script src="js/views/tracklist.js"></script>
 		<script src="js/views/app.js"></script>
 		<script src="js/views/spectrum.js"></script>
 

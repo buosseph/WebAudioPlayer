@@ -63,44 +63,22 @@ app.AppView = Backbone.View.extend({
 	el: '#app',
 	template: _.template($("#app_template").html()),
 	initialize: function() {
-		this.listenTo(app.Tracklist, "add", this.addTrack);
-		this.listenTo(app.Tracklist, "remove", this.removeTrack);
 		this.render();
 	},
 	render: function() {
 		this.$el.html(this.template);
 		var v = new app.SpectrumView({el: $("#spectrum")});
 		v.render();
+		var t = new app.TracklistView({el: $("#file-drop")});
 	},
 	events: {
-		"dragover #playlist" 	: "handleDragOver",
-		"drop #playlist" 		: "handleFiles",
 		"click #left-panel-ctl" : "toggleFileDrop",
-		"click #file-drop .slideout-panel-close" : "toggleFileDrop",
 		"click #right-panel-ctl": "toggleAudioCtl",
 		"click #audio-control .slideout-panel-close": "toggleAudioCtl",
 		"input #volume": "changeVolume",
 		"input #filter-cutoff": "changeFilterCutoff",
 		"change #filter-cutoff": "changeFilterCutoff",
 		"input #filter-type": "changeFilter"
-	},
-	handleDragOver: function(event) {
-		handleDragOver(event);
-	},
-	handleFiles: function(event) {
-		$("#playlist").empty();
-		$("#playlist").removeClass("empty-playlist");
-		handleFileSelect(event);
-	},
-	addTrack: function(track) {
-		var view = new app.TrackView({model: track})
-		$("#playlist").append(view.render().$el);
-	},
-	removeTrack: function() {
-		if (app.Tracklist.length == 0) {
-			$("#playlist").addClass("empty-playlist");
-			$("#playlist").append("Drop files here");
-		}
 	},
 	toggleFileDrop: function() {
 		$("#file-drop").toggleClass("is-visible");

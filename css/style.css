@@ -3,7 +3,7 @@ html, body, #app {
 }
 
 body {
-	background-color: #999;
+	background-color: #000;
 }
 
 /* Visualization Canvas */
@@ -56,7 +56,8 @@ body {
 }
 
 .slideout-panel-header {
-	background: #FFFFFF;
+	background: #161616;
+	color: #D0D0D0;
 	position: fixed;
 	top: -50px;
 	width: 100%;
@@ -97,7 +98,7 @@ body {
 
 .slideout-panel-content {
 	padding-top: 50px;
-	background: #565656;
+	background: #222;
 }
 
 #playlist {
@@ -120,14 +121,14 @@ li.track {
 	padding: 0 32px;
 	list-style: none;
 	min-height: 42px;
-	background: #222;
+	background: #282828;
 	color: #E2E2E2;
 	line-height: 42px;
 	font-size: 12px;
 }
 
 li.playing {
-	background: #383838;
+	background: #363636;
 }
 
 

@@ -110,7 +110,6 @@ body {
 	overflow-y: scroll;
 }
 
-/* Temporary centering */
 .empty-playlist {
 	text-align: center;
 	padding: 120px 0;
@@ -137,4 +136,7 @@ li.playing {
 #playbar {
 	height: 42px;
 	background: #222;
+	position: absolute;
+	width: 410px;
+	right: 0px;
 }

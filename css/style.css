@@ -148,6 +148,9 @@ li.playing div {
 	background: #363636;
 }
 
+#audio-control .slideout-panel-content {
+	color: #D0D0D0;
+}
 
 /* Footer */
 

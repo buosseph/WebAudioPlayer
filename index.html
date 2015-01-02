@@ -52,6 +52,8 @@
 					<input type="button" id="right-panel-ctl" value="Audio Controls"/>
 
 					<label>Volume: <input id="volume" type="range" min="0" max="1" step="0.01" value="1"/></label>
+					<canvas id="meter" width="12" height="32">
+					</canvas>
 				</div>
 			</footer>
 		</script>
@@ -95,11 +97,13 @@
 
 		<script src="js/models/track.js"></script>
 		<script src="js/models/spectrum.js"></script>
+		<script src="js/models/meter.js"></script>
 		<script src="js/collections/tracklist.js"></script>
 		<script src="js/views/track.js"></script>
 		<script src="js/views/tracklist.js"></script>
 		<script src="js/views/app.js"></script>
 		<script src="js/views/spectrum.js"></script>
+		<script src="js/views/meter.js"></script>
 
 		<script src="js/audio.js"></script>
 		<script src="js/app.js"></script>

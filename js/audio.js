@@ -16,12 +16,14 @@ if (!window.AudioContext) {
 app.audio = new AudioContext();
 app.source = null;
 app.analyser = null;
+// app.meter = null;
 
 app.volume = app.audio.createGain();
 
 app.filter = app.audio.createBiquadFilter();
 app.filter.type = 0; // 0 = lowpass, 1 = highpass, 2 = bandpass, 3 = lowshelf, 4 = highshelf, 5 = peaking, 6 = notch, 7 = allpass
 app.filter.frequency.value = 20000;
+
 
 function connectAndPlayNode(node) {
 	if (node != null) {

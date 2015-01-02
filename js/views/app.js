@@ -67,8 +67,10 @@ app.AppView = Backbone.View.extend({
 	},
 	render: function() {
 		this.$el.html(this.template);
-		var v = new app.SpectrumView({el: $("#spectrum")});
-		v.render();
+		var spectrum = new app.SpectrumView({el: $("#spectrum")});
+		spectrum.render();
+		var meter = new app.MeterView();
+		meter.render();
 		var t = new app.TracklistView({el: $("#file-drop")});
 	},
 	events: {

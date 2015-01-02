@@ -1,3 +1,5 @@
+var app = app || {};
+
 function handleFileSelect(event) {
 	// Need access to original event if abstracting this function outside of AppView
 	event.originalEvent.stopPropagation();
@@ -6,6 +8,7 @@ function handleFileSelect(event) {
 	var files = event.originalEvent.dataTransfer.files;
 	for (var i = 0, f; f = files[i]; i++) {
 		if (!f.type.match('audio.*')) {
+			console.log(f.name + " is not audio. Skipping");
 			continue;
 		}
 		var reader = new FileReader();
@@ -17,7 +20,6 @@ function handleFileSelect(event) {
 					node.buffer = buffer;
 
 					var length =  toTimeLength(buffer.duration);
-					console.log(length);
 					var track = new app.Track({
 						title: 	f.name,
 						type: 	f.type,
@@ -27,9 +29,14 @@ function handleFileSelect(event) {
 						node:   node,
 					});
 					app.Tracklist.push(track);
+				},
+				function() {
+					// Can't read .aiff? That's silly... Should add alert about that
+					console.log("Error decoding audio data");
 				});
 			}
 		})(f);
+
 		reader.readAsArrayBuffer(f);
 	}
 }
@@ -72,8 +79,14 @@ app.TracklistView = Backbone.View.extend({
 	addTrack: function(track) {
 		var view = new app.TrackView({model: track})
 		$("#playlist").append(view.render().$el);
+
+		// Buggy: views reload template on events
+		// // Separate TrackView template render and adding .loaded
+		// setTimeout(function() {
+		// 	view.$("#status").addClass("loaded");
+		// }, 0);	// animation delay handled in CSS 
 	},
-	removeTrack: function() {
+	removeTrack: function(track) {
 		if (app.Tracklist.length == 0) {
 			$("#playlist").addClass("empty-playlist");
 			$("#playlist").append("Drop files here");

@@ -47,7 +47,7 @@
 			</div>
 
 			<footer id="playbar">
-				<div class="container">
+				<div>
 					<input type="button" id="left-panel-ctl" value="File Drop"/>
 					<input type="button" id="right-panel-ctl" value="Audio Controls"/>
 
@@ -73,13 +73,15 @@
 			</div>
 		</script>
 		<script type="text/template" id="track_queue_template">
-			<%= title %>
-			<%= length %>
-			<a class=
-				<%= playing ? "\"stop\"" : "\"play\"" %>>
-				<%= playing ? "Stop" : "Play" %>
-			</a>
-			<a class="remove">Remove</a>
+			<div id="status">
+				<%= title %>
+				<%= length %>
+				<a class=
+					<%= playing ? "\"stop\"" : "\"play\"" %>>
+					<%= playing ? "Stop" : "Play" %>
+				</a>
+				<a class="remove">Remove</a>
+			</div>
 		</script>
 		<script type="text/template" id="spectrum_template">
 			<canvas id="spectrum" width="512" height="240">

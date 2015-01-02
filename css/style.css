@@ -117,16 +117,34 @@ body {
 }
 
 li.track {
-	padding: 0 32px;
+	position: relative;
 	list-style: none;
 	min-height: 42px;
+}
+
+li.track div {
+	width: 100%;
+	position: absolute;
+	padding: 0 32px;
 	background: #282828;
 	color: #E2E2E2;
 	line-height: 42px;
 	font-size: 12px;
+	left: 0;
+
+/*	transition-property: transform;
+	transition-duration: 0.3s;
+	transition-delay: 0.3s;
+
+	transform: translate3d(-100%, 0, 0);*/
 }
 
-li.playing {
+/*li.track div.loaded {
+	transform: translate3d(0, 0, 0);
+	transition-delay: 0s;
+}*/
+
+li.playing div {
 	background: #363636;
 }
 

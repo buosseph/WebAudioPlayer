@@ -16,48 +16,48 @@ function toTimeLength(totalSeconds) {
 	return hours + minutes + ":" + seconds;
 }
 
-function handleFileSelect(event) {
-	// Need access to original event if abstracting this function outside of AppView
-	event.originalEvent.stopPropagation();
-	event.originalEvent.preventDefault();
+// function handleFileSelect(event) {
+// 	// Need access to original event if abstracting this function outside of AppView
+// 	event.originalEvent.stopPropagation();
+// 	event.originalEvent.preventDefault();
 
-	var files = event.originalEvent.dataTransfer.files;
-	for (var i = 0, f; f = files[i]; i++) {
-		if (!f.type.match('audio.*')) {
-			continue;
-		}
-		var reader = new FileReader();
-		// Need to use closure to read multiple files and access meta data while loading
-		reader.onload = (function(f){
-			return function(event) {
-				app.audio.decodeAudioData(event.target.result, function(buffer) {
-					var node = app.audio.createBufferSource();
-					node.buffer = buffer;
+// 	var files = event.originalEvent.dataTransfer.files;
+// 	for (var i = 0, f; f = files[i]; i++) {
+// 		if (!f.type.match('audio.*')) {
+// 			continue;
+// 		}
+// 		var reader = new FileReader();
+// 		// Need to use closure to read multiple files and access meta data while loading
+// 		reader.onload = (function(f){
+// 			return function(event) {
+// 				app.audio.decodeAudioData(event.target.result, function(buffer) {
+// 					var node = app.audio.createBufferSource();
+// 					node.buffer = buffer;
 
-					var length =  toTimeLength(buffer.duration);
-					console.log(length);
-					var track = new app.Track({
-						title: 	f.name,
-						type: 	f.type,
-						size: 	f.size,
-						length: length,
-						buffer: buffer,
-						node:   node,
-					});
-					app.Tracklist.push(track);
-				});
-			}
-		})(f);
-		reader.readAsArrayBuffer(f);
-	}
-}
+// 					var length =  toTimeLength(buffer.duration);
+// 					console.log(length);
+// 					var track = new app.Track({
+// 						title: 	f.name,
+// 						type: 	f.type,
+// 						size: 	f.size,
+// 						length: length,
+// 						buffer: buffer,
+// 						node:   node,
+// 					});
+// 					app.Tracklist.push(track);
+// 				});
+// 			}
+// 		})(f);
+// 		reader.readAsArrayBuffer(f);
+// 	}
+// }
 
-function handleDragOver(event) {
-	// Need access to original event if abstracting this function outside of AppView
-	event.originalEvent.stopPropagation();
-	event.originalEvent.preventDefault();
-	event.originalEvent.dataTransfer.dropEffect = 'copy';
-}
+// function handleDragOver(event) {
+// 	// Need access to original event if abstracting this function outside of AppView
+// 	event.originalEvent.stopPropagation();
+// 	event.originalEvent.preventDefault();
+// 	event.originalEvent.dataTransfer.dropEffect = 'copy';
+// }
 
 app.AppView = Backbone.View.extend({
 	el: '#app',

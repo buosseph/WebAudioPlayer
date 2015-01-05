@@ -47,14 +47,17 @@
 			</div>
 
 			<footer id="left-footer">
-				<a id="left-panel-ctl" class="glyphicon glyphicon-music">
+				<a id="left-panel-ctl" class="glyphicon glyphicon-music" aria-label="Tracklist Queue">
+				</a>
+			</footer>
+
+			<footer id="right-footer">
+				<a id="right-panel-ctl" class="glyphicon glyphicon-cog" aria-label="Audio Controls">
 				</a>
 			</footer>
 
 			<footer id="playbar">
 				<div>
-					<input type="button" id="right-panel-ctl" value="Audio Controls"/>
-
 					<label>Volume: <input id="volume" type="range" min="0" max="1" step="0.01" value="1"/></label>
 					<canvas id="meter" width="12" height="32">
 					</canvas>

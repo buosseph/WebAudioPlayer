@@ -2,6 +2,10 @@ html, body, #app {
 	height: 100%;
 }
 
+html {
+	overflow: hidden;
+}
+
 body {
 	background-color: #000;
 }
@@ -154,13 +158,22 @@ li.playing div {
 
 /* Footer */
 
-#left-footer {
+#left-footer,
+#right-footer {
 	position: absolute;
-	left: 0;
 	bottom: 0;
 }
 
-#left-panel-ctl {
+#left-footer {
+	left: 0;
+}
+
+#right-footer {
+	right: 0;
+}
+
+#left-panel-ctl,
+#right-panel-ctl {
 	width: 42px;
 	height: 42px;
 	background: #161616;
@@ -169,7 +182,8 @@ li.playing div {
 	text-align: center;
 }
 
-#left-panel-ctl:hover{
+#left-panel-ctl:hover,
+#right-panel-ctl:hover {
 	text-decoration: none;
 	background: #222;
 }
@@ -178,6 +192,8 @@ li.playing div {
 	height: 42px;
 	background: #222;
 	position: absolute;
-	width: 410px;
-	right: 0px;
+	width: 35%;
+	right: 32.5%;
+	left: 32.5%;
+	bottom: 0;
 }

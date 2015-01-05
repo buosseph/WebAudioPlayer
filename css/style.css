@@ -154,6 +154,26 @@ li.playing div {
 
 /* Footer */
 
+#left-footer {
+	position: absolute;
+	left: 0;
+	bottom: 0;
+}
+
+#left-panel-ctl {
+	width: 42px;
+	height: 42px;
+	background: #161616;
+	color: #D0D0D0;
+	line-height: 42px;
+	text-align: center;
+}
+
+#left-panel-ctl:hover{
+	text-decoration: none;
+	background: #222;
+}
+
 #playbar {
 	height: 42px;
 	background: #222;
